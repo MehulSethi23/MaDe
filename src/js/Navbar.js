@@ -10,19 +10,21 @@ function Navbar({ callback }) {
   const [Loader, setLoader] = useState(false);
 
   // function to get data
-  const getData = setTimeout(async () => {
+  const getData = async () => {
     try {
       const data = await axios.get().then((res) => {
         setData(res.data.data);
-        setLoader(false);
+        setTimeout(() => {
+          //Loader
+          setLoader(false);
+        }, 1250);
       });
     } catch (error) {
       setError(error.message);
-      console.log("Error is :", error);
+      console.log("Error is :", error); //Get the Error Reports
     }
-  }, 3000); //Timeout for 3 seconds to display the Loader
+  };
   callback(Data);
-
   return (
     <>
       {Loader && <LinearProgress />}
